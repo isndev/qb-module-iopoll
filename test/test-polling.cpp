@@ -62,7 +62,7 @@ public:
 class TestListener : public qbm::iopoll::actor::Listener<TestListener>
 {
 public:
-    TestListener(unsigned short const port)
+    explicit TestListener(unsigned short const port)
         : Listener(0, port) {}
 
     bool onInitialize() {

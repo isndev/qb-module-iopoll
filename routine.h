@@ -57,7 +57,7 @@ namespace qbm {
                 return limit_time_activity;
             }
 
-            inline void repoll(Proxy &event) const {
+            static inline void repoll(Proxy &event) {
                 event.setEvents(Derived::type);
                 event.repoll();
             }
@@ -73,11 +73,11 @@ namespace qbm {
                 auto status = ReturnValue::KO;
 
                 if constexpr (Derived::type == Type::WRITE) {
-                    status = event.getEvents() & EPOLLOUT
+                    status = (event.getEvents() & EPOLLOUT)
                              ? static_cast<Derived &>(*this).onWrite(event)
                              : ReturnValue::KO;
                 } else if constexpr (Derived::type == Type::READ) {
-                    status = event.getEvents() & EPOLLIN
+                    status = (event.getEvents() & EPOLLIN)
                              ? static_cast<Derived &>(*this).onRead(event)
                              : ReturnValue::KO;
                 } else {

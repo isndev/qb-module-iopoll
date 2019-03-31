@@ -47,7 +47,7 @@ namespace qbm {
             network::epoll::Proxy proxy;
             Proxy() : proxy(-1) {}
             Proxy(Proxy const &) = default;
-            Proxy(network::epoll::Proxy const &proxy)
+            explicit Proxy(network::epoll::Proxy const &proxy)
                     : proxy(proxy) {}
 
             inline bool receive(void *data, std::size_t size, std::size_t &received) const {
