@@ -29,7 +29,7 @@ namespace qbm {
                     , public Proxy {
 
                 Ready() = delete;
-                explicit Ready(Proxy const &proxy)
+                Ready(Proxy const &proxy)
                         : Proxy(proxy)
                 {}
                 Ready(network::epoll::Proxy const &proxy, epoll_event const &event)
