@@ -16,7 +16,7 @@
  */
 
 #include <qb/actor.h>
-#include <qb/network/epoll.h>
+#include <qb/io/epoll.h>
 #include "../event/all.h"
 #include "tag.h"
 
@@ -31,7 +31,7 @@ namespace qbm {
                     : public qb::ServiceActor<Tag>
                     , public qb::ICallback
             {
-                network::epoll::Poller<> _epoll;
+                io::epoll::Poller<> _epoll;
             public:
                 SocketPoller() = default;
 

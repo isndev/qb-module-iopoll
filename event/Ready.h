@@ -32,7 +32,7 @@ namespace qbm {
                 Ready(Proxy const &proxy)
                         : Proxy(proxy)
                 {}
-                Ready(network::epoll::Proxy const &proxy, epoll_event const &event)
+                Ready(io::epoll::Proxy const &proxy, epoll_event const &event)
                         : Proxy(proxy) {
                     ep_event = event;
                 }

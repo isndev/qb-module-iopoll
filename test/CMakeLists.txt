@@ -19,7 +19,7 @@ if (QB_BUILD_TEST)
     qb_register_module_gtest(
             NAME ${PROJECT_NAME}
             TESTNAME polling
-            DEPENDENCIES ${QB_PREFIX}-network
+            DEPENDENCIES ${QB_PREFIX}-io
             SOURCES test-polling.cpp
     )
 endif()

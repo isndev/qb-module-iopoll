@@ -68,7 +68,7 @@ public:
     bool onInitialize() {
         return true;
     }
-    void onConnect(qb::network::tcp::Socket event) {
+    void onConnect(qb::io::tcp::Socket event) {
         event.setBlocking(false);
         auto session = addRefActor<TestSession>();
         auto &e = push<qbm::iopoll::event::Subscribe>(_io_id);
@@ -87,7 +87,7 @@ TEST(Example, TestIOPollingOnListener) {
 
     main.start();
 
-    qb::network::tcp::Socket client;
+    qb::io::tcp::Socket client;
     client.connect("127.0.0.1", 12399);
     client.send("hello world !", 14);
 
@@ -104,7 +104,7 @@ TEST(Example, TestIOPollingTimeoutKeepAlive) {
 
     main.start();
 
-    qb::network::tcp::Socket client;
+    qb::io::tcp::Socket client;
     client.connect("127.0.0.1", 12399);
 
     main.join();

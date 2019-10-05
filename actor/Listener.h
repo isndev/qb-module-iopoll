@@ -33,7 +33,7 @@ namespace qbm {
             struct ExampleTrait {
 
                 bool onInitialize();
-                void onConnect(network::tcp::Socket event);
+                void onConnect(io::tcp::Socket event);
             };
 
             template <typename Derived>
@@ -44,15 +44,15 @@ namespace qbm {
                 constexpr static const bool has_keepalive = false;
             protected:
                 const qb::ActorId       _io_id;
-                network::tcp::Listener       _listener;
+                io::tcp::Listener       _listener;
 
             protected:
-                inline network::tcp::Listener &getListener() { return _listener; }
+                inline io::tcp::Listener &getListener() { return _listener; }
             public:
                 Listener() = delete;
                 Listener(uint8_t const coreId,
                          unsigned short port,
-                         network::ip ip = network::ip::Any)
+                         io::ip ip = io::ip::Any)
                     : _io_id(this->template getServiceId<service::Tag>(coreId))
                 {
                     _listener.listen(port, ip);
@@ -74,9 +74,9 @@ namespace qbm {
                 }
 
                 ReturnValue onRead(event::Ready const &event) {
-                    network::tcp::Socket socket;
+                    io::tcp::Socket socket;
 
-                    if (_listener.accept(socket) == network::SocketStatus::Done) {
+                    if (_listener.accept(socket) == io::SocketStatus::Done) {
                         static_cast<Derived &>(*this).onConnect(socket.raw());
                         LOG_INFO("Accepted new connection");
                     } else {
